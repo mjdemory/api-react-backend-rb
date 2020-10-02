@@ -45,12 +45,8 @@ class RoastBoastViewSets(viewsets.ModelViewSet):
         post.save()
         return Response({'status': 'downvote success'})
 
-    # @action(detail=True, methods=['post'])
-    # def create_post(self, request, pk=None):
-    #     post = self.get_object()
-    #     serializer = RoastBoastSerializer(data=request.data)
-    #     if serializer.is_valid():
-    #         post.create_post(serializer.data['body', 'choices'])
-    #         post.save()
-    #         return Response({'status': 'post created'})
-
+    @action(detail=False)
+    def VoteScoreViewSet(self, request):
+        boast = RoastBoastModel.objects.order_by('vote_score')
+        serializer = self.get_serializer(boast, many=True)
+        return Response(serializer.data)
