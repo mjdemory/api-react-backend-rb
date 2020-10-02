@@ -6,6 +6,7 @@ class RoastBoastSerializer(ModelSerializer):
     class Meta:
         model = RoastBoastModel
         fields = [
+            'id',
             'body',
             'choices',
             'upvote',

@@ -27,30 +27,30 @@ class RoastBoastViewSets(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['post'])
     def upvote(self, request, pk=None):
-        post = RoastBoastModel.objects.get(id=pk)
-        serializer = RoastBoastSerializer(data=request.data)
-        if serializer.is_valid():
-            post.upvote = post.upvote + 1
-            post.vote_score = post.vote_score +1
-            post.save()
-            return Response({'status': 'upvote added'})
+        post = self.get_object()
+        # serializer = RoastBoastSerializer(data=request.data)
+        # if serializer.is_valid():
+        post.upvote = post.upvote + 1
+        post.vote_score = post.vote_score +1
+        post.save()
+        return Response({'status': 'upvote success'})
 
     @action(detail=True, methods=['post'])
     def downvote(self, request, pk=None):
-        post = RoastBoastModel.objects.get(id=pk)
-        serializer = RoastBoastSerializer(data=request.data)
-        if serializer.is_valid():
-            post.downvote = post.downvote - 1
-            post.vote_score = post.vote_score - 1
-            post.save()
-            return Response({'status': 'downvote added'})
-
-    @action(detail=True, methods=['post'])
-    def create_post(self, request, pk=None):
         post = self.get_object()
-        serializer = RoastBoastSerializer(data=request.data)
-        if serializer.is_valid():
-            post.create_post(serializer.data['body', 'choices'])
-            post.save()
-            return Response({'status': 'post created'})
+        # serializer = RoastBoastSerializer(data=request.data)
+        # if serializer.is_valid():
+        post.downvote = post.downvote - 1
+        post.vote_score = post.vote_score - 1
+        post.save()
+        return Response({'status': 'downvote success'})
+
+    # @action(detail=True, methods=['post'])
+    # def create_post(self, request, pk=None):
+    #     post = self.get_object()
+    #     serializer = RoastBoastSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         post.create_post(serializer.data['body', 'choices'])
+    #         post.save()
+    #         return Response({'status': 'post created'})
 
