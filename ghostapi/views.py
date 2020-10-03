@@ -28,8 +28,6 @@ class RoastBoastViewSets(viewsets.ModelViewSet):
     @action(detail=True, methods=['post'])
     def upvote(self, request, pk=None):
         post = self.get_object()
-        # serializer = RoastBoastSerializer(data=request.data)
-        # if serializer.is_valid():
         post.upvote = post.upvote + 1
         post.vote_score = post.vote_score +1
         post.save()
@@ -38,8 +36,6 @@ class RoastBoastViewSets(viewsets.ModelViewSet):
     @action(detail=True, methods=['post'])
     def downvote(self, request, pk=None):
         post = self.get_object()
-        # serializer = RoastBoastSerializer(data=request.data)
-        # if serializer.is_valid():
         post.downvote = post.downvote - 1
         post.vote_score = post.vote_score - 1
         post.save()
